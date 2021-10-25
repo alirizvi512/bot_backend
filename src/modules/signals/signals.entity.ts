@@ -1,0 +1,31 @@
+import { AbstractEntity } from './../../common/abstract.entity';
+import { Column, Entity } from 'typeorm';
+import { RoleType } from '../../common/constants/role-type';
+import { VirtualColumn } from '../../decorators/virtual-column.decorator';
+
+@Entity({ name: 'signals' })
+export class SignalsEntity extends AbstractEntity {
+  @Column({ nullable: true })
+  firstName?: string;
+
+  @Column({ nullable: true })
+  lastName?: string;
+
+  @Column({ type: 'enum', enum: RoleType, default: RoleType.USER })
+  role: RoleType;
+
+  @Column({ unique: true, nullable: true })
+  email?: string;
+
+  @Column({ nullable: true })
+  password?: string;
+
+  @Column({ nullable: true })
+  phone?: string;
+
+  @Column({ nullable: true })
+  avatar?: string;
+
+  @VirtualColumn()
+  fullName?: string;
+}
